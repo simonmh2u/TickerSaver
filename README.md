@@ -2,7 +2,7 @@
 
 <h2 align="center">
     <a href="https://httpie.io" target="blank_">
-        <img height="100" alt="Ticker Saver" src="https://github.com/simonmh2u/TickerSaver/docs/logo.png" />
+        <img height="100" alt="Ticker Saver" src="https://github.com/simonmh2u/TickerSaver/blob/main/docs/logo.png?raw=true" />
     </a>
     <br>
  Free web-socket wrapper client for Zerodha Trading platform 
@@ -37,7 +37,6 @@ Any backend Live Trading Algo program can now use this live tick current price d
 - User needs to manually login into Kite on any browser , and copy the below token 
  <img height="100" alt="Ticker Saver" src="https://github.com/simonmh2u/TickerSaver/docs/logo.png" />
 - Needs to set the username and token as environment variables "ZUSERNAME"  and "ZWSSTOKEN" respectively
-*OR*
 - Needs to add in conf/config.json the "zusername" and "zwsstoken" (this overrides the above env variables)
 	```
 	{

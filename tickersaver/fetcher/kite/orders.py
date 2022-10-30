@@ -1,5 +1,5 @@
 import requests
-from utils.log import logger_instance
+from tickersaver.utils.log import logger_instance
 
 logger = logger_instance
 

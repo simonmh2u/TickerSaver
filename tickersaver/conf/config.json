@@ -1,6 +1,6 @@
 {
   "dbpath": "live_price.db",
-  "tickerfile_path": "conf/ticker_instruments.csv",
+  "tickerfile_path": "tickersaver/conf/ticker_instruments.csv",
   "subscribe_current_positions": true,
   "default_instruments": [
     256265,

@@ -1,8 +1,8 @@
 from kiteconnect import KiteTicker
-from utils.log import logger_instance
+from tickersaver.utils.log import logger_instance
 from urllib.parse import quote_plus
-from cache.sqllite_cache import Sqllite
-from fetcher.kite.orders import Order
+from tickersaver.cache.sqllite_cache import Sqllite
+from tickersaver.fetcher.kite.orders import Order
 import os, csv, datetime, json
 
 logger = logger_instance
@@ -106,7 +106,7 @@ def start_stream(config):
 
 
 def main():
-    with open("conf/config.json") as fp:
+    with open("tickersaver/conf/config.json") as fp:
         config = fp.read()
         config = json.loads(config)
     username = os.getenv("ZUSERNAME")

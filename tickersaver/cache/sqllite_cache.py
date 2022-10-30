@@ -1,5 +1,5 @@
 import sqlite3, datetime
-from utils.log import logger_instance
+from tickersaver.utils.log import logger_instance
 
 logging = logger_instance
 
