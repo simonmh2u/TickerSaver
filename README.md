@@ -70,14 +70,14 @@ OR
 ### Startup Steps  
 - User needs to manually login into Kite on any browser , and copy the below token and user from the Cookie section of the developer console.  
  <img height="100" alt="Ticker Saver" src="https://github.com/simonmh2u/TickerSaver/blob/main/docs/cookie.png?raw=true" />  
-- Needs to set the username and token as environment variables "ZUSERNAME"  and "ZWSSTOKEN" respectively  
-*OR*  
+- Needs to set the username and token as environment variables "ZUSERNAME"  and "ZWSSTOKEN" respectively    
 - Needs to add  "zusername" and "zwsstoken" configs in the user supplied config file path(this overrides the above env variables)  
    ``` { "zusername":"YL1111", "zwsstoken":"XXXXXXX" } ```
+- Fire up the application
 
-   ```tickersaver -c config.json``` (when package installed)
-   OR
-   ``` python tickersaver/fetcher/kite/ws_tick_fetcher.py  -c config.json``` (when source downloaded)
+    - ```tickersaver -c config.json``` (when package installed)
+
+    - ``` python tickersaver/fetcher/kite/ws_tick_fetcher.py  -c config.json``` (when source downloaded)
 
 
 # Disclaimer  
