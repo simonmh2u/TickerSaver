@@ -1,6 +1,6 @@
 {
-  "dbpath": "live_price.db",
-  "tickerfile_path": "tickersaver/conf/ticker_instruments.csv",
+  "dbpath": "/Users/simon/srv/webapps/bigbasket.com/TickerSaver/live_price.db",
+  "tickerfile_path": "/Users/simon/srv/webapps/bigbasket.com/TickerSaver/tickersaver/conf/ticker_instruments.csv",
   "subscribe_current_positions": true,
   "default_instruments": [
     256265,

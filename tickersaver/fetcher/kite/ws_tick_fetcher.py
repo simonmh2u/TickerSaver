@@ -3,7 +3,7 @@ from tickersaver.utils.log import logger_instance
 from urllib.parse import quote_plus
 from tickersaver.cache.sqllite_cache import Sqllite
 from tickersaver.fetcher.kite.orders import Order
-import os, csv, datetime, json
+import os, csv, datetime, json, argparse
 
 logger = logger_instance
 
@@ -106,7 +106,11 @@ def start_stream(config):
 
 
 def main():
-    with open("tickersaver/conf/config.json") as fp:
+    parser = argparse.ArgumentParser(description='Zerodha Ticker Saver')
+    parser.add_argument('-c', '--config', help='Configuration file path', required=True)
+    args = parser.parse_args()
+    config_filepath = args.config
+    with open(config_filepath) as fp:
         config = fp.read()
         config = json.loads(config)
     username = os.getenv("ZUSERNAME")
