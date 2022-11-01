@@ -69,7 +69,12 @@ OR
   
 ### Startup Steps  
 - User needs to manually login into Kite on any browser , and copy the below token and user from the Cookie section of the developer console.  
- <img height="100" alt="Ticker Saver" src="https://github.com/simonmh2u/TickerSaver/blob/main/docs/cookie.png?raw=true" />  
+
+    <a href="https://httpie.io" target="blank_">  
+        <img height="100" alt="Ticker Saver" src="https://github.com/simonmh2u/TickerSaver/blob/main/docs/cookie.png?raw=true" />  
+    </a>  
+    <br>  
+  
 - Needs to set the username and token as environment variables "ZUSERNAME"  and "ZWSSTOKEN" respectively    
 - Needs to add  "zusername" and "zwsstoken" configs in the user supplied config file path(this overrides the above env variables)  
    ``` { "zusername":"YL1111", "zwsstoken":"XXXXXXX" } ```
