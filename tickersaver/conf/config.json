@@ -1,0 +1,14 @@
+{
+  "dbpath": "tmp/live_price.db",
+  "tickerfile_path": "tmp/ticker_instruments.csv",
+  "instrument_touch_path": "tmp/instrument_touch.txt",
+  "subscribe_current_positions": true,
+  "default_instruments": [
+    256265,
+    264969,
+    260105
+  ],
+  "zwsstoken": "",
+  "zusername": ""
+
+}
