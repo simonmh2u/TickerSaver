@@ -28,11 +28,10 @@ def on_ticks(ws, ticks):
     config = ws.config
     filename = config.get("tickerfile_path")
 
-    # exit on 15:24
     dt = datetime.datetime.now()
-    # if dt.time() >= datetime.time(15, 24, 0):
-    #     logger.info("Exiting as Indian MIS market hours have closed")
-    #     ws.close(code=4000, reason="market_close_time")
+    if dt.time() > datetime.time(15, 24, 0):
+        logger.info("Exiting as market hours have ended")
+        ws.close(4000)
 
     # If ticker file has changed then refresh the instrument list from the ticker file
     dynamic_config_mod_time = os.stat(filename).st_mtime
