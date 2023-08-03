@@ -63,9 +63,18 @@ def on_ticks(ws, ticks):
 
 
 def on_close(ws, code, reason):
+    config = ws.config
     logger.info("Close received with the code, reason - {}, {}".format(code, reason))
     if code == 4000:
         logger.info("Exiting as market hours have ended, in on_close - {}".format(code))
+        try:
+            filename = config.get("tickerfile_path")
+            with open(filename, 'r+') as f:
+                logger.info("Truncating file: {}".format(filename))
+                f.truncate()
+        except IOError:
+            log_message = config.document_name + ": Failure while truncating file"
+            logger.error(log_message)
         ws.stop()
 
 
