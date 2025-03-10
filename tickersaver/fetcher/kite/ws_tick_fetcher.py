@@ -23,6 +23,8 @@ class KT(KiteTicker):
             username, wsstoken)
         super(KT, self)._create_connection(url, **kwargs)
 
+def on_order_update(ws, data):
+    logger.debug("Order Update: {}".format(data))
 
 def on_ticks(ws, ticks):
     config = ws.config
@@ -111,6 +113,7 @@ def start_stream(config):
     kws.on_ticks = on_ticks
     kws.on_connect = on_connect
     kws.on_close = on_close
+    kws.on_order_update = on_order_update
     kws.instrument_list = []
     kws.always_on_instrument_list = config.get("default_instruments")
     kws.order = order
