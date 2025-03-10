@@ -29,7 +29,7 @@ def on_order_update(ws, data):
         logger.debug("Order Update: {}".format(data))
         order_id = data.get("order_id")
         status = data.get("status")
-        trading_symbol = data.get("trading_symbol")
+        trading_symbol = data.get("tradingsymbol")
         ws.sql.set_order(order_id, status, trading_symbol)
     except Exception as e:
         logger.exception("Error while updating order: {}".format(e))
