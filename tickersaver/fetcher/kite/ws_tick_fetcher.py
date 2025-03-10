@@ -13,6 +13,7 @@ class KT(KiteTicker):
     def init_db(self, config):
         sql = Sqllite()
         sql.init_ltp_db(config.get("dbpath"))
+        sql.init_order_db(config.get("orderdbpath"))
         self.sql = sql
 
     def _create_connection(self, url, **kwargs):
@@ -24,7 +25,14 @@ class KT(KiteTicker):
         super(KT, self)._create_connection(url, **kwargs)
 
 def on_order_update(ws, data):
-    logger.debug("Order Update: {}".format(data))
+    try:
+        logger.debug("Order Update: {}".format(data))
+        order_id = data.get("order_id")
+        status = data.get("status")
+        trading_symbol = data.get("trading_symbol")
+        ws.sql.set_order(order_id, status, trading_symbol)
+    except Exception as e:
+        logger.exception("Error while updating order: {}".format(e))
 
 def on_ticks(ws, ticks):
     config = ws.config

@@ -21,6 +21,25 @@ class Sqllite(object):
         self.cursor.execute("CREATE INDEX IF NOT EXISTS date_index on option_chain (chain_date)")
         self.con.commit()
 
+    def init_order_db(self, dbpath):
+        self.con = sqlite3.connect(dbpath)
+        self.cursor = self.con.cursor()
+        self.cursor.execute(
+            "CREATE TABLE IF NOT EXISTS orders (order_id text PRIMARY KEY ,status text ,trading_symbol text ,time_stamp DATE DEFAULT (datetime('now','localtime')))")
+        self.cursor.execute("CREATE INDEX IF NOT EXISTS order_index on orders (order_id)")
+        self.con.commit()
+
+    def get_order(self, order_id):
+        result = self.cursor.execute("select status from orders where order_id = ?", (order_id,))
+        result = result.fetchone()
+        return result[0] if result else None
+
+    def set_order(self, order_id, status, trading_symbol):
+        self.cursor.execute(
+            "INSERT INTO orders (order_id,status,trading_symbol) VALUES(?,?,?) ON CONFLICT(order_id) DO UPDATE SET status= ?, time_stamp=?",
+            (order_id, status, trading_symbol, status, datetime.datetime.now()))
+        self.con.commit()
+
     def get_ltp(self, name, time_window=1000):
         d = datetime.datetime.now() - datetime.timedelta(seconds=time_window)
         result = self.cursor.execute("select ltp from price where  name = ? and time_stamp > ?", (name, d))
