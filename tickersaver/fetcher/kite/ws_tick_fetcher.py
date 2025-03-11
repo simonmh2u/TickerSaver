@@ -3,7 +3,7 @@ from tickersaver.utils.log import logger_instance
 from urllib.parse import quote_plus
 from tickersaver.cache.sqllite_cache import Sqllite
 from tickersaver.fetcher.kite.orders import Order
-import os, csv, datetime, json, argparse
+import os, csv, datetime, json, argparse, six
 
 logger = logger_instance
 
@@ -20,9 +20,27 @@ class KT(KiteTicker):
         wsstoken = os.getenv("zwsstoken") or self.config.get("wsstoken")
         wsstoken = quote_plus(wsstoken)
         username = os.getenv("ZUSERNAME") or self.config.get("username")
-        url = 'wss://ws.zerodha.com/?api_key=kitefront&user_id={}&enctoken={}&uid=1&user-agent=kite3-web&version=2.9.1'.format(
+        url = 'wss://ws.zerodha.com/?api_key=kitefront&user_id={}&enctoken={}&uid=1&user-agent=kite3-web&version=3.0.0'.format(
             username, wsstoken)
         super(KT, self)._create_connection(url, **kwargs)
+
+    def _parse_text_message(self, payload):
+        """Parse text message."""
+        # Decode unicode data
+        if not six.PY2 and type(payload) == bytes:
+            payload = payload.decode("utf-8")
+        try:
+            data = json.loads(payload)
+        except ValueError:
+            return
+
+        # Order update callback
+        if self.on_order_update and data.get("type") == "order" and data:
+            self.on_order_update(self, data)
+
+        # Custom error with websocket error code 0
+        if data.get("type") == "error":
+            self._on_error(self, 0, data.get("data"))
 
 def on_order_update(ws, data):
     try:

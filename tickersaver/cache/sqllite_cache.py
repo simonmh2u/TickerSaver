@@ -23,7 +23,7 @@ class Sqllite(object):
 
     def init_order_db(self, dbpath):
         self.con1 = sqlite3.connect(dbpath)
-        self.cursor1 = self.con.cursor()
+        self.cursor1 = self.con1.cursor()
         self.cursor1.execute(
             "CREATE TABLE IF NOT EXISTS orders (order_id text PRIMARY KEY ,status text ,trading_symbol text ,time_stamp DATE DEFAULT (datetime('now','localtime')))")
         self.cursor1.execute("CREATE INDEX IF NOT EXISTS order_index on orders (order_id)")
@@ -38,7 +38,7 @@ class Sqllite(object):
         self.cursor1.execute(
             "INSERT INTO orders (order_id,status,trading_symbol) VALUES(?,?,?) ON CONFLICT(order_id) DO UPDATE SET status= ?, time_stamp=?",
             (order_id, status, trading_symbol, status, datetime.datetime.now()))
-        self.con.commit()
+        self.con1.commit()
 
     def get_ltp(self, name, time_window=1000):
         d = datetime.datetime.now() - datetime.timedelta(seconds=time_window)
