@@ -36,7 +36,7 @@ class Sqllite(object):
 
     def set_order(self, order_id, status, trading_symbol):
         self.cursor1.execute(
-            "INSERT INTO orders (order_id,status,trading_symbol) VALUES(?,?,?) ON CONFLICT(order_id) DO UPDATE SET status= ?, time_stamp=?",
+            "INSERT INTO orders (order_id, status, trading_symbol) VALUES (?, ?, ?) ON CONFLICT(order_id) DO UPDATE SET status = ?, time_stamp = ? WHERE orders.status != 'COMPLETE'",
             (order_id, status, trading_symbol, status, datetime.datetime.now()))
         self.con1.commit()
 
